@@ -22,7 +22,10 @@ import { Route as BookingIdRouteImport } from './routes/booking/$id'
 import { Route as CarsIndexRouteImport } from './routes/cars/index'
 import { Route as CarsIdRouteImport } from './routes/cars/$id'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
+import { Route as AuthenticatedAdminBookingsRouteImport } from './routes/_authenticated/admin.bookings'
 import { Route as AuthenticatedAdminCarsRouteImport } from './routes/_authenticated/admin.cars'
+import { Route as AuthenticatedAdminCustomersRouteImport } from './routes/_authenticated/admin.customers'
+import { Route as AuthenticatedAdminPaymentsRouteImport } from './routes/_authenticated/admin.payments'
 import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard.index'
 import { Route as AuthenticatedDashboardBookingsRouteImport } from './routes/_authenticated/dashboard.bookings'
 import { Route as AuthenticatedDashboardHistoryRouteImport } from './routes/_authenticated/dashboard.history'
@@ -92,11 +95,29 @@ const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthenticatedAdminRoute,
 } as any)
+const AuthenticatedAdminBookingsRoute =
+  AuthenticatedAdminBookingsRouteImport.update({
+    id: '/bookings',
+    path: '/bookings',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 const AuthenticatedAdminCarsRoute = AuthenticatedAdminCarsRouteImport.update({
   id: '/cars',
   path: '/cars',
   getParentRoute: () => AuthenticatedAdminRoute,
 } as any)
+const AuthenticatedAdminCustomersRoute =
+  AuthenticatedAdminCustomersRouteImport.update({
+    id: '/customers',
+    path: '/customers',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminPaymentsRoute =
+  AuthenticatedAdminPaymentsRouteImport.update({
+    id: '/payments',
+    path: '/payments',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 const AuthenticatedDashboardIndexRoute =
   AuthenticatedDashboardIndexRouteImport.update({
     id: '/',
@@ -134,7 +155,10 @@ export interface FileRoutesByFullPath {
   '/booking/$id': typeof BookingIdRoute
   '/cars/$id': typeof CarsIdRoute
   '/cars/': typeof CarsIndexRoute
+  '/admin/bookings': typeof AuthenticatedAdminBookingsRoute
   '/admin/cars': typeof AuthenticatedAdminCarsRoute
+  '/admin/customers': typeof AuthenticatedAdminCustomersRoute
+  '/admin/payments': typeof AuthenticatedAdminPaymentsRoute
   '/dashboard/bookings': typeof AuthenticatedDashboardBookingsRoute
   '/dashboard/history': typeof AuthenticatedDashboardHistoryRoute
   '/dashboard/profile': typeof AuthenticatedDashboardProfileRoute
@@ -151,7 +175,10 @@ export interface FileRoutesByTo {
   '/booking/$id': typeof BookingIdRoute
   '/cars/$id': typeof CarsIdRoute
   '/cars': typeof CarsIndexRoute
+  '/admin/bookings': typeof AuthenticatedAdminBookingsRoute
   '/admin/cars': typeof AuthenticatedAdminCarsRoute
+  '/admin/customers': typeof AuthenticatedAdminCustomersRoute
+  '/admin/payments': typeof AuthenticatedAdminPaymentsRoute
   '/dashboard/bookings': typeof AuthenticatedDashboardBookingsRoute
   '/dashboard/history': typeof AuthenticatedDashboardHistoryRoute
   '/dashboard/profile': typeof AuthenticatedDashboardProfileRoute
@@ -172,7 +199,10 @@ export interface FileRoutesById {
   '/booking/$id': typeof BookingIdRoute
   '/cars/$id': typeof CarsIdRoute
   '/cars/': typeof CarsIndexRoute
+  '/_authenticated/admin/bookings': typeof AuthenticatedAdminBookingsRoute
   '/_authenticated/admin/cars': typeof AuthenticatedAdminCarsRoute
+  '/_authenticated/admin/customers': typeof AuthenticatedAdminCustomersRoute
+  '/_authenticated/admin/payments': typeof AuthenticatedAdminPaymentsRoute
   '/_authenticated/dashboard/bookings': typeof AuthenticatedDashboardBookingsRoute
   '/_authenticated/dashboard/history': typeof AuthenticatedDashboardHistoryRoute
   '/_authenticated/dashboard/profile': typeof AuthenticatedDashboardProfileRoute
@@ -193,7 +223,10 @@ export interface FileRouteTypes {
     | '/booking/$id'
     | '/cars/$id'
     | '/cars/'
+    | '/admin/bookings'
     | '/admin/cars'
+    | '/admin/customers'
+    | '/admin/payments'
     | '/dashboard/bookings'
     | '/dashboard/history'
     | '/dashboard/profile'
@@ -210,7 +243,10 @@ export interface FileRouteTypes {
     | '/booking/$id'
     | '/cars/$id'
     | '/cars'
+    | '/admin/bookings'
     | '/admin/cars'
+    | '/admin/customers'
+    | '/admin/payments'
     | '/dashboard/bookings'
     | '/dashboard/history'
     | '/dashboard/profile'
@@ -230,7 +266,10 @@ export interface FileRouteTypes {
     | '/booking/$id'
     | '/cars/$id'
     | '/cars/'
+    | '/_authenticated/admin/bookings'
     | '/_authenticated/admin/cars'
+    | '/_authenticated/admin/customers'
+    | '/_authenticated/admin/payments'
     | '/_authenticated/dashboard/bookings'
     | '/_authenticated/dashboard/history'
     | '/_authenticated/dashboard/profile'
@@ -344,11 +383,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
+    '/_authenticated/admin/bookings': {
+      id: '/_authenticated/admin/bookings'
+      path: '/bookings'
+      fullPath: '/admin/bookings'
+      preLoaderRoute: typeof AuthenticatedAdminBookingsRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
     '/_authenticated/admin/cars': {
       id: '/_authenticated/admin/cars'
       path: '/cars'
       fullPath: '/admin/cars'
       preLoaderRoute: typeof AuthenticatedAdminCarsRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/customers': {
+      id: '/_authenticated/admin/customers'
+      path: '/customers'
+      fullPath: '/admin/customers'
+      preLoaderRoute: typeof AuthenticatedAdminCustomersRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/payments': {
+      id: '/_authenticated/admin/payments'
+      path: '/payments'
+      fullPath: '/admin/payments'
+      preLoaderRoute: typeof AuthenticatedAdminPaymentsRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
     '/_authenticated/dashboard/': {
@@ -383,12 +443,18 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedAdminRouteChildren {
+  AuthenticatedAdminBookingsRoute: typeof AuthenticatedAdminBookingsRoute
   AuthenticatedAdminCarsRoute: typeof AuthenticatedAdminCarsRoute
+  AuthenticatedAdminCustomersRoute: typeof AuthenticatedAdminCustomersRoute
+  AuthenticatedAdminPaymentsRoute: typeof AuthenticatedAdminPaymentsRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
 }
 
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
+  AuthenticatedAdminBookingsRoute: AuthenticatedAdminBookingsRoute,
   AuthenticatedAdminCarsRoute: AuthenticatedAdminCarsRoute,
+  AuthenticatedAdminCustomersRoute: AuthenticatedAdminCustomersRoute,
+  AuthenticatedAdminPaymentsRoute: AuthenticatedAdminPaymentsRoute,
   AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
 }
 
