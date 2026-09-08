@@ -8,7 +8,6 @@ import { toast } from "sonner";
 import { Pencil, Plus, Trash2 } from "lucide-react";
 import { AdminPage } from "@/components/admin/AdminPage";
 import { EmptyState, ErrorState, LoadingState } from "@/components/site/states";
-import { StatusBadge } from "@/components/site/StatusBadge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -462,5 +461,3 @@ function SelectField({ control, name, label, options }: FieldProps & { options: 
     />
   );
 }
-
-export { StatusBadge };
