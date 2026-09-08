@@ -13,7 +13,6 @@ export default defineConfig({
       // generated production chunks, causing deployment to fail after the
       // client assets have already been emitted.
       rollupOptions: {
-        treeshake: false,
       },
     },
   },
