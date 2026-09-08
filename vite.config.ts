@@ -7,6 +7,15 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
+  vite: {
+    build: {
+      // Vite 8's Rolldown tree-shaker can drop declarations from TanStack's
+      // generated production chunks, causing deployment to fail after the
+      // client assets have already been emitted.
+      rollupOptions: {
+      },
+    },
+  },
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
